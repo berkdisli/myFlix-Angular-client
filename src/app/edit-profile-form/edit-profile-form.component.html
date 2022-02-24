@@ -1,58 +1,62 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Sign Up!</mat-card-title>
+    <mat-card-title>User Profile</mat-card-title>
   </mat-card-header>
+
   <mat-card-content>
     <form>
+      <!------ username ------->
       <mat-form-field>
         <input
           matInput
-          [(ngModel)]="userData.Username"
+          [(ngModel)]="userProfile.Username"
           placeholder="Username"
           type="text"
           name="Username"
           required
         />
       </mat-form-field>
+
+      <!------ password ------->
       <mat-form-field>
         <input
           matInput
-          [(ngModel)]="userData.Password"
-          type="password"
+          [(ngModel)]="userProfile.Password"
           placeholder="Password"
+          type="password"
           name="Password"
           required
         />
       </mat-form-field>
+
+      <!------ Email ------->
       <mat-form-field>
         <input
           matInput
-          [(ngModel)]="userData.Email"
-          type="email"
+          [(ngModel)]="userProfile.Email"
           placeholder="Email"
+          type="email"
           name="Email"
+          class="input"
           required
         />
       </mat-form-field>
+
+      <!------ birthday ------->
       <mat-form-field>
         <input
           matInput
-          [(ngModel)]="userData.Birthday"
-          type="date"
+          [(ngModel)]="userProfile.Birthday"
           placeholder="Birthday"
+          type="date"
           name="Birthday"
         />
       </mat-form-field>
     </form>
   </mat-card-content>
-  <mat-card-actions>
-    <button
-      class="btns"
-      mat-raised-button
-      (click)="registerUser()"
-      color="primary"
-    >
-      Sign Up
-    </button>
-  </mat-card-actions>
+
+  <!------ Button ------->
+  <mat-dialog-actions>
+    <button mat-raised-button (click)="updateUser()">Update Profile</button>
+  </mat-dialog-actions>
 </mat-card>

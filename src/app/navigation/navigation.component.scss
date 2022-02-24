@@ -1,0 +1,67 @@
+.logo {
+    width: 70px;
+  }
+  
+  mat-toolbar {
+    height: 8vh;
+    width: 100vw;
+    background: rgb(255, 255, 255);
+    color: rgb(194, 15, 15);
+    padding-right: 50px;
+  }
+  
+  div {
+    overflow: inherit;
+  }
+  
+  mat-sidenav-container {
+    min-height: 93vh !important;
+  }
+  
+  mat-sidenave-content {
+    text-align: center;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .head-menu {
+    margin-left: 20px;
+    font-size: 15px;
+  }
+  .head-menu:hover {
+    color: rgb(204, 37, 32);
+  }
+  
+  .head-menu-button {
+    margin-left: 20px;
+    background-color: rgb(243, 236, 236);
+    color: rgb(158, 25, 21);
+  
+    border: 2px solid rgb(204, 7, 7);
+    transition-duration: 0.4s;
+  }
+  
+  .head-menu-button:hover {
+    background-color: rgb(177, 10, 10);
+    color: rgb(248, 246, 246);
+  }
+  .menu-side {
+    margin-top: 10px;
+    color: rgb(241, 235, 235);
+  }
+  
+  .side-menu-container {
+    background-color: black;
+    width: 150px !important;
+  }
+  
+  .side-icon {
+    margin-right: 5px;
+  }
+  
+  mat-divider {
+    background-color: gray;
+    margin-top: 10px;
+  }
