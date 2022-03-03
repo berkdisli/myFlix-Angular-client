@@ -35,6 +35,9 @@ mat-divider {
   margin-left: 50px;
 }
 
+.director-button {
+right: 25px;
+}
 mat-icon {
   margin-right: 10px;
   color: #d8afa2 !important;
@@ -86,7 +89,7 @@ mat-card-actions {
 .favorite-card {
   margin: 10px;
   width: 195px;
-  background-color: black;
+  background-color: rgb(167, 13, 13);
 }
 
 .img-container {
@@ -120,7 +123,7 @@ mat-card-actions {
   height: 10px;
 }
 #fav-action-btn {
-  color: rgb(202, 167, 8) !important;
+  color: rgb(241, 238, 238)  !important;
 }
 .mat-icon-button {
   position: absolute;
@@ -129,5 +132,5 @@ mat-card-actions {
 }
 
 .remove-btn {
-  color: rgb(161, 7, 7) !important;
+  color: rgb(236, 232, 232) !important;
 }

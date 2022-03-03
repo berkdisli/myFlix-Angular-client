@@ -9,16 +9,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./edit-profile-form.component.scss'],
 })
 export class EditProfileFormComponent implements OnInit {
-  Username = localStorage.getItem('user');
-  user: any = {};
 
-  
-  @Input() userProfile = {
-    Username: this.user.Username,
-    Password: this.user.Password,
-    Email: this.user.Email,
-    Birthday: this.user.Birthday,
-  };
+  @Input() userProfile = { 
+    Username: localStorage.getItem('user'), 
+    Password: '', 
+    Email: '', 
+    Birthday: '' };
 
   constructor(
     public fetchApiData: UserRegistrationService,
@@ -27,43 +23,32 @@ export class EditProfileFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getSingleUser();
   }
 
-  /**
-   * get user info
-   */
-  getSingleUser(): void {
-    const user = localStorage.getItem('user');
-    this.fetchApiData.getSingleUser(user).subscribe((resp: any) => {
-      this.user = resp;
-    });
-  }
-
-  /**
-   * updates the user information in API
-   * @function updateUser
-   * @param Username {any}
-   * @param userProfile {any}
-   * @return an updated user in json format
-   * then stores it in localstorage. a popup message is displayed after successful updated
-   */
+  /* The user is able to update their personal data.*/
   updateUser(): void {
     this.fetchApiData
-      .updateUser(this.Username, this.userProfile)
-      .subscribe((resp) => {
+    .updateUser(this.userProfile).subscribe(
+      (res) => {
         this.dialogRef.close();
-
-        // update profile in localstorage
-        localStorage.setItem('Username', this.userProfile.Username);
-        localStorage.setItem('Password', this.userProfile.Password);
-
-        this.snackBar.open('Your profile was updated successfully!', 'OK', {
-          duration: 4000,
+        localStorage.setItem('user', res.Username);
+        this.snackBar.open('Profile updated successfully!', 'Ok', {
+          duration: 2000,
         });
-        setTimeout(() => {
-          window.location.reload();
+      },
+      (res) => {
+        // console.log(res);
+        this.snackBar.open(res, 'Ok', {
+          duration: 2000,
         });
-      });
+      }
+    );
+
+    setTimeout(function () {
+      window.location.reload();
+    }, 1000);
+
   }
 }
+
+

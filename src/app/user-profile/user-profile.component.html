@@ -71,6 +71,7 @@
       </button>
       <button
         mat-button
+        class="director-button"
         color="accent"
         id="fav-action-btn"
         (click)="
@@ -90,7 +91,7 @@
       mat-icon-button
       (click)="removeFavoriteMovie(favorite._id, favorite.title)"
     >
-      <mat-icon class="remove-btn">remove_circle</mat-icon>
+      <mat-icon class="remove-btn">X</mat-icon>
     </button>
   </mat-card>
 </div>

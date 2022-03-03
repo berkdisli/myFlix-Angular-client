@@ -15,6 +15,7 @@ export class MovieCardComponent implements OnInit {
   movies: any = [];
   FavoriteMovies: any[] = [];
   user: any[] = [];
+  
   constructor(
     public fetchApiData: UserRegistrationService,
     public dialog: MatDialog,
@@ -38,7 +39,7 @@ export class MovieCardComponent implements OnInit {
 
   getFavoriteMovies(): void {
     const user = localStorage.getItem('user');
-    this.fetchApiData.getSingleUser(user).subscribe((resp: any) => {
+    this.fetchApiData.getFavMovieOfSingleUser(user).subscribe((resp: any) => {
       this.FavoriteMovies = resp.FavoriteMovies;
       console.log(this.FavoriteMovies);
     });
@@ -78,7 +79,6 @@ export class MovieCardComponent implements OnInit {
     });
     return this.getFavoriteMovies();
   }
-
 
    removeMovieFromFav(MovieId: string, title: string): void {
     this.fetchApiData.removeMovieFromFav(MovieId).subscribe((resp: any) => {
