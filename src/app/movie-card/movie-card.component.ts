@@ -45,6 +45,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+/**
+   *open a dialog to display the GenreCardComponent
+   * @param name {string}
+   * @param description {string}
+   */
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(GenreCardComponent, {
       data: { name: name, description: description },
@@ -52,6 +57,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * open a dialog to display the DirectorCardComponent
+   * @param name {string}
+   * @param bio {string}
+   * @param birth {string}
+   */
   openDirectorDialog(
     name: string,
     bio: string,
@@ -63,6 +74,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * open a dialog to display the SynopsisCardComponent
+   * @param title {string}
+   * @param description {string}
+   */
   openSynopsisDialog(title: string, description: string): void {
     this.dialog.open(SynopsisCardComponent, {
       data: { title: title, description: description },
@@ -70,6 +86,13 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+   /**
+   * use API end-point to add user favorite movie
+   * @function addMovieToFav
+   * @param MovieID {string}
+   * @param title {string}
+   * @returns an array of the movie object in json format
+   */
    addMovieToFav(MovieID: string, title: string): void {
     this.fetchApiData.addMovieToFav(MovieID).subscribe((resp: any) => {
       this.snackBar.open(`${title} has been added to your favorites!`, 'OK', {
@@ -80,6 +103,13 @@ export class MovieCardComponent implements OnInit {
     return this.getFavoriteMovies();
   }
 
+  /**
+   * use API end-point to remove user favorite
+   * @function removeMovieFromFav
+   * @param MovieId {string}
+   * @param title {string}
+   * @returns updated user's data in json format
+   */
    removeMovieFromFav(MovieId: string, title: string): void {
     this.fetchApiData.removeMovieFromFav(MovieId).subscribe((resp: any) => {
       console.log(resp);
@@ -95,12 +125,23 @@ export class MovieCardComponent implements OnInit {
     return this.getFavoriteMovies();
   }
 
-
+ /**
+   * check if the movie is the user's favorite?
+   * @param MovieID {string}
+   * @returns true or false
+   */
   isFavorite(MovieID: string): boolean {
     return this.FavoriteMovies.some((movie) => movie._id === MovieID);
   }
 
-  
+  /**
+   * toggle add/remove user's favorite function.
+   * if the movie is not on the favorite list, call ...
+   * @function addFavoriteMovie
+   * if the movie is already on the user favorite list, call ...
+   * @function removeFavoriteMovie
+   * @param movie {any}
+   */
   toggleFavorite(movie: any): void {
     this.isFavorite(movie._id)
       ? this.removeMovieFromFav(movie._id, movie.Title)

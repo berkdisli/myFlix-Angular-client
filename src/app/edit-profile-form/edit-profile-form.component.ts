@@ -25,7 +25,14 @@ export class EditProfileFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /* The user is able to update their personal data.*/
+/**
+   * updates the user information in API
+   * @function updateUser
+   * @param Username {any}
+   * @param userProfile {any}
+   * @return an updated user in json format
+   * then stores it in localstorage. a popup message is displayed after successful updated
+   */
   updateUser(): void {
     this.fetchApiData
     .updateUser(this.userProfile).subscribe(

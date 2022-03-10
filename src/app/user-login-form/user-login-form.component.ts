@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-login-form.component.scss'],
 })
 export class UserLoginFormComponent implements OnInit {
+  /**
+   * get input values then store in loginData
+   */
   @Input() loginData = { Username: '', Password: '' };
   constructor(
     public fetchApiData: UserRegistrationService,
@@ -20,6 +23,13 @@ export class UserLoginFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * use API end-point to login the user by getting data from the input.
+   * Then sotes the user's data in localstorage
+   * @function userLogin
+   * @param loginData {object}
+   * @return user's data in json format
+   */
   userLogin(): void {
     this.fetchApiData.userLogin(this.loginData).subscribe(
       (result) => {
