@@ -41,8 +41,6 @@ export class UserProfileComponent implements OnInit {
     if (user) {
       this.fetchApiData.getSingleUser(user).subscribe((resp: User) => {
         this.user = resp;
-
-        console.log(this.user);
       });
     }
   }
@@ -51,15 +49,15 @@ export class UserProfileComponent implements OnInit {
    * get user's FavoriteMovies from the user's data
    */
   getFavoriteMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((res: any) => {
-      this.movies = res;
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp;
+      this.FavMovies = [];
       this.movies.forEach((movie: any) => {
         if (this.user.FavoriteMovies.includes(movie._id)) {
           this.FavMovies.push(movie);
         }
       });
     });
-    // console.log(this.favoriteMovies);
   }
 
    /**
@@ -71,7 +69,6 @@ export class UserProfileComponent implements OnInit {
    */
   removeFavoriteMovie(MovieID: string, title: string): void {
     this.fetchApiData.removeMovieFromFav(MovieID).subscribe((resp: any) => {
-      console.log(resp);
       this.snackBar.open(
         `${title} has been removed from your favorites!`,
         'OK',
@@ -81,6 +78,8 @@ export class UserProfileComponent implements OnInit {
       );
       this.ngOnInit();
     });
+    this.getUserInfo();
+    return this.getFavoriteMovies();
   }
 
    /**

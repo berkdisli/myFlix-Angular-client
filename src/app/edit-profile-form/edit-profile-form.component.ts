@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,12 +9,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./edit-profile-form.component.scss'],
 })
 export class EditProfileFormComponent implements OnInit {
+  Username = localStorage.getItem('user');
+  user: any = {};
 
-  @Input() userProfile = { 
-    Username: localStorage.getItem('user'), 
-    Password: '', 
-    Email: '', 
-    Birthday: '' };
+  /**
+   *  Binding input values to userProfile object
+   */
+  @Input() userProfile = {
+    Username: this.user.Username,
+    Password: this.user.Password,
+    Email: this.user.Email,
+    Birthday: this.user.Birthday,
+  };
 
   constructor(
     public fetchApiData: UserRegistrationService,
@@ -23,9 +29,20 @@ export class EditProfileFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getUser();
   }
 
-/**
+  /**
+   * get user info
+   */
+  getUser(): void {
+    const user = localStorage.getItem('user');
+    this.fetchApiData.getSingleUser(user).subscribe((resp: any) => {
+      this.user = resp;
+    });
+  }
+
+  /**
    * updates the user information in API
    * @function updateUser
    * @param Username {any}
@@ -35,27 +52,20 @@ export class EditProfileFormComponent implements OnInit {
    */
   updateUser(): void {
     this.fetchApiData
-    .updateUser(this.userProfile).subscribe(
-      (res) => {
+      .updateUser(this.Username, this.userProfile)
+      .subscribe((resp) => {
         this.dialogRef.close();
-        localStorage.setItem('user', res.Username);
-        this.snackBar.open('Profile updated successfully!', 'Ok', {
-          duration: 2000,
-        });
-      },
-      (res) => {
-        // console.log(res);
-        this.snackBar.open(res, 'Ok', {
-          duration: 2000,
-        });
-      }
-    );
 
-    setTimeout(function () {
-      window.location.reload();
-    }, 1000);
+        // update profile in localstorage
+        localStorage.setItem('Username', resp.this.userProfile.Username);
+        localStorage.setItem('Password', resp.this.userProfile.Password);
 
+        this.snackBar.open('Your profile was updated successfully!', 'OK', {
+          duration: 4000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        });
+      });
   }
 }
-
-
